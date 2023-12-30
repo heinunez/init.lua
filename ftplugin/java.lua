@@ -7,6 +7,11 @@ end
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local ws_dir = vim.fn.expand("~/.cache/jdtls/workspace/") .. project_name
 
+local bundles = {
+  vim.fn.glob("~/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar", 1),
+};
+vim.list_extend(bundles, vim.split(vim.fn.glob("~/.local/share/java-test/server/*.jar", 1), "\n"))
+
 local config = {
   cmd = { 
     vim.fn.expand("~/.local/share/nvim/mason/bin/jdtls"),
@@ -16,6 +21,7 @@ local config = {
   settings = {
     java = {
       configuration = {
+        updateBuildConfiguration = "automatic",
         runtimes = {
           {
             name = "JavaSE-1.8",
@@ -26,8 +32,12 @@ local config = {
             path = vim.fn.expand("~/.jabba/jdk/openjdk@1.17.0")
           }
         }
-      }
+      },
+      saveActions = { organizeImports = true },
     }
+  },
+  init_options = {
+    bundles = bundles;
   }
 }
 
