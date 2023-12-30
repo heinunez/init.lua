@@ -26,7 +26,7 @@ end
 return packer.startup(function(use)
   use("wbthomason/packer.nvim")
 
-  use("bluz71/vim-nightfly-guicolors")
+  use("folke/tokyonight.nvim")
   
   -- tmux & split window navigation
   use("christoomey/vim-tmux-navigator")
@@ -53,7 +53,12 @@ return packer.startup(function(use)
   use({"nvim-telescope/telescope.nvim", branch = "0.1.x"})
 
   -- lsp
-  use("williamboman/mason.nvim")
+  use({"williamboman/mason.nvim", opts = {
+    registries = {
+      "github:nvim-java/mason-registry",
+			"github:mason-org/mason-registry",
+    }
+  }})
   use("williamboman/mason-lspconfig.nvim")
   use({"VonHeikemen/lsp-zero.nvim", branch = "v3.x"})
   use({"neovim/nvim-lspconfig", requires = "hrsh7th/cmp-nvim-lsp", ensure_dependencies = true})
@@ -61,6 +66,8 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/cmp-path")
   use("mfussenegger/nvim-jdtls")
+  use("mfussenegger/nvim-dap")
+  use("jay-babu/mason-nvim-dap.nvim")
 
   -- treesiter
   use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
@@ -68,6 +75,7 @@ return packer.startup(function(use)
 
   -- git
   use("lewis6991/gitsigns.nvim")
+  use("tpope/vim-fugitive")
 
   if packer_bootstrap then
     require("packer").sync()
