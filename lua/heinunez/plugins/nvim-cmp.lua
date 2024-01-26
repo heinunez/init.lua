@@ -11,7 +11,8 @@ if not luasnip_status then
 end
 
 -- friendly snipets
-require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_snipmate").lazy_load()
 
 vim.opt.completeopt = "menu,menuone,noselect"
 

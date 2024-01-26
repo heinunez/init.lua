@@ -48,7 +48,11 @@ return lazy.setup({
   "williamboman/mason-lspconfig.nvim",
   {"VonHeikemen/lsp-zero.nvim", branch = "v3.x"},
   {"neovim/nvim-lspconfig", dependencies = {"hrsh7th/cmp-nvim-lsp"}},
-  {"hrsh7th/nvim-cmp", dependencies = {"L3MON4D3/LuaSnip"}},
+  {"hrsh7th/nvim-cmp", dependencies = {
+      {"L3MON4D3/LuaSnip", dependencies = {"rafamadriz/friendly-snippets", "molleweide/LuaSnip-snippets.nvim"}}, 
+      "saadparwaiz1/cmp_luasnip"
+    }
+  },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "mfussenegger/nvim-jdtls",
@@ -69,6 +73,11 @@ return lazy.setup({
     config = function ()
         require"alpha".setup(require"alpha.themes.startify".config)
     end
-  }
+  },
+
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" }
+  },
 })
 

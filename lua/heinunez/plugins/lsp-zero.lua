@@ -24,7 +24,10 @@ end
 
 lsp_zero.on_attach(function(client, bufnr)
   -- keybindings
-  lsp_zero.default_keymaps({buffer = bufnr}) 
+  lsp_zero.default_keymaps({
+    buffer = bufnr,
+    preserve_mappings = false
+  }) 
 end)
 
 mason.setup()
