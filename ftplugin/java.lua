@@ -12,6 +12,12 @@ local bundles = {
 };
 vim.list_extend(bundles, vim.split(vim.fn.glob("~/.local/share/java-test/server/*.jar", 1), "\n"))
 
+local runtimes = vim.fn.json_decode(
+  vim.fn.readfile(
+    vim.fn.expand("~/.config/java/jdks.json")
+  )
+)
+
 local config = {
   cmd = { 
     vim.fn.expand("~/.local/share/nvim/mason/bin/jdtls"),
@@ -22,16 +28,7 @@ local config = {
     java = {
       configuration = {
         updateBuildConfiguration = "automatic",
-        runtimes = {
-          {
-            name = "JavaSE-1.8",
-            path = vim.fn.expand("~/.jabba/jdk/amazon-corretto@1.8.292-10.1")
-          },
-          {
-            name = "JavaSE-17",
-            path = vim.fn.expand("~/.jabba/jdk/openjdk@1.17.0")
-          }
-        }
+        runtimes = runtimes,
       },
       saveActions = { organizeImports = true },
     }
