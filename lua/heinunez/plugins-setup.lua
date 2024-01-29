@@ -17,7 +17,7 @@ if not status then
 end
 
 return lazy.setup({
-  "folke/tokyonight.nvim",
+  "olimorris/onedarkpro.nvim",
   
   -- tmux & split window navigation
   "christoomey/vim-tmux-navigator",

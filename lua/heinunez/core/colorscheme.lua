@@ -1,14 +1,6 @@
-local theme_status, theme = pcall(require, "tokyonight")
+local opt = vim.opt
 
-if not theme_status then
-  return
-end
-
-theme.setup({
-  transparent = true,
-})
-
-local status, _ = pcall(vim.cmd, "colorscheme tokyonight")
+local status, _ = pcall(vim.cmd, "colorscheme onedark")
 if not status then
   print("colorscheme not found")
   return
