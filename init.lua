@@ -11,4 +11,5 @@ require("heinunez.plugins.nvim-cmp")
 require("heinunez.plugins.autopairs")
 require("heinunez.plugins.treesitter")
 require("heinunez.plugins.gitsigns")
+require("heinunez.plugins.spooky")
 

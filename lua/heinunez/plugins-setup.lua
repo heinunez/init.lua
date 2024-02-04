@@ -79,5 +79,9 @@ return lazy.setup({
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" }
   },
+  -- templates
+  {
+    "Futarimiti/spooky.nvim", dependencies = {"nvim-telescope/telescope.nvim"}
+  },
 })
 

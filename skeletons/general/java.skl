@@ -1,0 +1,20 @@
+return function (buf)
+    local name = vim.api.nvim_buf_get_name(buf)
+    local basename = vim.fs.basename(name)
+    local basedir = vim.fs.dirname(name)
+
+    return { 
+      class_name = basename:gsub("%.java$", ""):gsub("^%l", string.upper),
+      package = basedir:gsub("^.*/src/main/java/", "")
+                    :gsub(basename, "")
+                    :gsub("/", "%."),
+      _cursor = { 4, 1 }
+    }
+end
+---
+package ${package};
+
+public class ${class_name} {
+
+}
+
