@@ -1,6 +1,6 @@
 # init lua
 ## prerequisite
-make, gcc, ripgrep, unzip, g++, jabba, npm, leiningen
+make, gcc, ripgrep, unzip, xclip, g++, jabba, npm, leiningen
 
 ### Build java-test manually
 - clone [vscode-java-test](https://github.com/microsoft/vscode-java-test) 
