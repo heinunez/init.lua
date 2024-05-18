@@ -11,6 +11,14 @@ nvimtree.setup({
   update_focused_file = {
     enable = true
   },
+  view = {
+    side = "right",
+    width = 40,
+    adaptive_size = true,
+  },
+  renderer = {
+    group_empty = true,
+  },
   actions = {
     open_file = {
       window_picker = {
