@@ -6,6 +6,7 @@ return function (buf)
     return { 
       class_name = basename:gsub("%.java$", ""):gsub("^%l", string.upper),
       package = basedir:gsub("^.*/src/main/java/", "")
+                    :gsub("^.*/src/test/java/", "")
                     :gsub(basename, "")
                     :gsub("/", "%."),
       _cursor = { 4, 1 }
