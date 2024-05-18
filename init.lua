@@ -12,4 +12,5 @@ require("heinunez.plugins.autopairs")
 require("heinunez.plugins.treesitter")
 require("heinunez.plugins.gitsigns")
 require("heinunez.plugins.spooky")
+require("heinunez.plugins.cursorline")
 
