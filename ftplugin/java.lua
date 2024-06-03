@@ -14,6 +14,8 @@ vim.list_extend(bundles, vim.split(vim.fn.glob("~/.local/share/java-test/server/
 
 local runtimes = vim.fn.json_decode(
   vim.fn.readfile(
+    -- [{name:"",path:""}] . 
+    -- List of names: https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     vim.fn.expand("~/.config/java/jdks.json")
   )
 )
