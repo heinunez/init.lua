@@ -48,6 +48,7 @@ mason_lspconfig.setup({
     "tailwindcss",
     "clojure_lsp",
     "tsserver",
+    "kotlin_language_server",
   },
   automatic_installation = true,
   handlers = {

@@ -25,6 +25,7 @@ treesitter.setup({
     "dockerfile",
     "gitignore",
     "java",
+    "kotlin",
   },
   auto_install = true,
 })
