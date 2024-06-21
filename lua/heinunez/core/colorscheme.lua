@@ -10,7 +10,10 @@ theme.setup({
     keywords = "bold,italic",
     comments = "italic",
     functions = "italic",
-    conditionals = "italic"
+    conditionals = "italic",
+  },
+  options = {
+    transparency = true,
   }
 })
 
