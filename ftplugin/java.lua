@@ -9,16 +9,82 @@ local ws_dir = vim.fn.expand("~/.cache/jdtls/workspace/") .. project_name
 
 local bundles = {
   vim.fn.glob("~/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar", 1),
-};
+}
+
 vim.list_extend(bundles, vim.split(vim.fn.glob("~/.local/share/java-test/server/*.jar", 1), "\n"))
 
-local runtimes = vim.fn.json_decode(
-  vim.fn.readfile(
-    -- [{name:"",path:""}] . 
-    -- List of names: https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-    vim.fn.expand("~/.config/java/jdks.json")
-  )
-)
+local get_sdk_env_name = function(folder)
+  local envs = {
+    ["1.8"] = "JavaSE-1.8",
+    ["11"] = "JavaSE-11",
+    ["17"] = "JavaSE-17",
+    ["1.17"] = "JavaSE-17",
+    ["21"] = "JavaSE-21"
+  }
+
+  local env_name = nil
+
+  local starts_with = function(str, start)
+    return str:sub(1, #start) == start
+  end
+
+  local clean_vendor = function(str)
+    local i = string.find(str, "@")
+
+    if i == nil then
+      return str
+    end
+
+    return str:sub(i + 1, #str)
+  end
+
+  for i, v in pairs(envs) do
+    if starts_with(clean_vendor(folder), i) then
+      env_name = v
+      break
+    end
+  end
+
+  return env_name  
+end
+
+local sdk_runtimes = function(base_path)
+  local sdk_dir = vim.fn.expand(base_path)
+  local sdk_folder_list = io.popen('find ' ..sdk_dir.. " -mindepth 1 -maxdepth 1 -type d -printf '%f\\n' | sort -r")
+  local sdks = {}
+
+  if sdk_folder_list == nil then
+    return sdks
+  end
+
+  for sdk_version in sdk_folder_list:lines() do
+    local env_name = get_sdk_env_name(sdk_version)
+
+    if env_name ~= nil then
+      table.insert(sdks, {name=env_name, path= sdk_dir..sdk_version})
+    end
+  end
+
+  sdk_folder_list:close()
+  return sdks
+end
+
+local all_runtimes = function()
+  local add = function(t1, t2)
+    for i = 1, #t2 do
+      table.insert(t1, t2[i])
+    end
+  end
+
+  local sdkman_runtimes = sdk_runtimes("~/.sdkman/candidates/java/")
+  local jabba_runtimes = sdk_runtimes("~/.jabba/jdk/")
+  
+  add(sdkman_runtimes, jabba_runtimes)
+
+  return sdkman_runtimes
+end
+
+local runtimes = all_runtimes()
 
 local is_file_exist = function(path)
   local f = io.open(path, 'r')
